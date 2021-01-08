@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: sans-serif;
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-color: #003545;
+}
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+#header {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  transition: 0.3s;
+  padding-bottom: 20px;
+}
+#header.inverted {
+  background-color: rgba(15, 10, 19, 0.445);
+  box-shadow: 0 3px 5px 0.3px rgba(0, 0, 0, 0.1);
+}
+#header h1 {
+  text-align: center;
+  color: #fff;
+  transition: 0.3s;
+  padding: 20px 0px;
+}
+#header h1.inverted {
+  padding-top: 40px;
+}
+#filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto;
+  width: 70%;
+}
+#loading {
+  color: #ececec;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#tasks {
+  margin: 0 auto;
+  width: 100%;
+}
+td {
+  padding: 10px;
+}
+th {
+  background-color: #ececec;
+  padding: 10px;
+}
+td:nth-child(1) {
+  background-color: #00454a;
+  width: 10%;
+  color: #ececec;
+}
+td:nth-child(2) {
+  background-color: #3c6562;
+  width: 80%;
+  color: #ececec;
+}
+td:nth-child(3) {
+  background-color: #f78888;
+  width: 10%;
+}
+tr.untoggled,
+tr.typed,
+tr.selected {
+  display: none;
+}
+.button {
+  background-color: darkgray;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 94px;
+  height: 52px;
+}
+#select {
+  padding: 15px 32px;
+  height: 52px;
+  font-size: 16px;
+}
+#search-input {
+  padding: 15px 32px;
+  font-size: 16px;
+  height: 52px;
+}
+.clicked {
+  background-color: #f78888;
+}
+@media only screen and (max-width: 960px) {
+  .button {
+    height: 44px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+  #select {
+    padding: 12px 28px;
+    font-size: 14px;
+    height: 44px;
+  }
+  #search-input {
+    padding: 12px 28px;
+    font-size: 14px;
+    height: 44px;
+  }
+  #filters {
+    width: 100%;
+  }
+  .container {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 580px) {
+  #filters {
+    display: block;
+    text-align: center;
+  }
+  #search-input {
+    max-width: 180px;
+  }
+  #button-container {
+    padding-top: 14px;
+  }
+}
