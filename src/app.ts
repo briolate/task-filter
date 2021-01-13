@@ -40,22 +40,11 @@ type Todo = {
   const table = document.getElementById("tasks") as HTMLTableElement;
   let rows = Array.from(table.tBodies[0].rows);
 
-  function getVisibleRows(): void {
-    for (var i = 0, max = rows.length; i < max; i++) {
-      if (rows[i].classList.contains("toggled")) {
-        rows[i].classList.add("toggled");
-      } else {
-        rows[i].classList.remove("toggled");
-      }
-    }
-  }
-
   // Filter by user id
   const select = <HTMLInputElement>document.getElementById("select");
   select.addEventListener("change", selectFilter);
 
   function selectFilter(): void {
-    getVisibleRows();
     const selectValue = select.value;
     for (let i = 0; i < rows.length; i++) {
       let td = rows[i].getElementsByTagName("td")[0];
@@ -78,7 +67,6 @@ type Todo = {
   searchInput.addEventListener("keyup", textFilter);
 
   function textFilter(): void {
-    getVisibleRows();
     const filterValue = searchInput.value.toLowerCase();
     for (let i = 0; i < rows.length; i++) {
       let td = rows[i].getElementsByTagName("td")[1];
@@ -106,7 +94,6 @@ type Todo = {
   });
 
   const buttonFilter = (textContent: string): void => {
-    getVisibleRows();
     for (let i = 0; i < rows.length; i++) {
       let td = rows[i].getElementsByTagName("td")[2];
       if (td) {
