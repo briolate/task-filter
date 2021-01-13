@@ -1,3 +1,7 @@
+export interface HttpResponse<T> extends Response {
+  parsedBody?: T;
+}
+
 export default async <T>(
   url: string,
   method = "get",
@@ -5,22 +9,19 @@ export default async <T>(
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   }
-): Promise<T | { error: string }> => {
+): Promise<HttpResponse<T>> => {
   const controller = new AbortController();
+
+  const res: HttpResponse<T> = await fetch(`${url}`, {
+    signal: controller.signal,
+    method: method.toUpperCase(),
+    headers: { ...headers },
+  });
   try {
-    const res = await fetch(`${url}`, {
-      signal: controller.signal,
-      method: method.toUpperCase(),
-      headers: { ...headers },
-    });
-    if (!res.ok) {
-      const error = await res.json();
-      return { error: error.code };
-    }
-    return await res.json();
-  } catch (err) {
-    return { error: err };
-  } finally {
-    controller.abort();
+    res.parsedBody = await res.json();
+  } catch (ex) {}
+  if (!res.ok) {
+    throw new Error(res.statusText);
   }
+  return res;
 };

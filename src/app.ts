@@ -1,4 +1,5 @@
 import API from "./api/fetch";
+import { HttpResponse } from "./api/fetch";
 const url = "https://jsonplaceholder.typicode.com/todos";
 
 type Todo = {
@@ -9,14 +10,25 @@ type Todo = {
 };
 
 (async () => {
-  const response = (await API(url, "get")) as Todo[];
-  if (response) {
-    hideloader();
+  let response: HttpResponse<Todo[]>;
+  try {
+    response = await API(url, "get");
+    if (response) {
+      hideloader();
+      show(response.parsedBody as Todo[]);
+    }
+  } catch (response) {
+    error();
   }
-  show(response);
 
   function hideloader() {
     document.getElementById("loading")!.style.display = "none";
+  }
+
+  function error() {
+    document.getElementById(
+      "loading"
+    )!.innerHTML = `<h1>No data available</h1>`;
   }
 
   // Create table from json
